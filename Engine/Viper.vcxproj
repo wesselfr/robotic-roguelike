@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{7f0a7367-a200-4b9c-888f-775b5f0e1713}</ProjectGuid>
+    <RootNamespace>ViperEngine</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>ViperEngine</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)inter\engine\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)inter\engine\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>ENGINE_EXPORTS;PLATFORM_X64;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)Dependencies\Include;$(ProjectDir)Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)Dependencies;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;glew32.lib;glfw3.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>call $(SolutionDir)copyfiles.bat</Command>
+      <Message>Copy files to output folder.</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>ENGINE_EXPORTS;PLATFORM_X64;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)Dependencies\Include;$(ProjectDir)Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)Dependencies;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;glew32.lib;glfw3.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>call $(SolutionDir)copyfiles.bat</Command>
+      <Message>Copy files to output folder.</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\DebugVisuals.cpp" />
+    <ClCompile Include="Source\Engine.cpp" />
+    <ClCompile Include="Source\Gameplay\Actor.cpp" />
+    <ClCompile Include="Source\Gameplay\Bullet.cpp" />
+    <ClCompile Include="Source\Gameplay\BulletPool.cpp" />
+    <ClCompile Include="Source\Gameplay\Camera\Camera.cpp" />
+    <ClCompile Include="Source\Gameplay\Camera\FollowCamera.cpp" />
+    <ClCompile Include="Source\Gameplay\Components\Physics\RigidBodyComponent.cpp" />
+    <ClCompile Include="Source\Gameplay\Components\TileVisual.cpp" />
+    <ClCompile Include="Source\Gameplay\InputManager.cpp" />
+    <ClCompile Include="Source\Gameplay\Transform.cpp" />
+    <ClCompile Include="Source\Log.cpp" />
+    <ClCompile Include="Source\Physics\AABB.cpp" />
+    <ClCompile Include="Source\Physics\CircleBounds.cpp" />
+    <ClCompile Include="Source\Primitives\Line.cpp" />
+    <ClCompile Include="Source\Primitives\Quad.cpp" />
+    <ClCompile Include="Source\Primitives\Text.cpp" />
+    <ClCompile Include="Source\Resources\ShaderLoader.cpp" />
+    <ClCompile Include="Source\Resources\StackAllocator.cpp" />
+    <ClCompile Include="Source\Resources\Texture.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Headers\API.h" />
+    <ClInclude Include="Headers\DebugVisuals.h" />
+    <ClInclude Include="Headers\Engine.h" />
+    <ClInclude Include="Headers\Gameplay\Actor.h" />
+    <ClInclude Include="Headers\Gameplay\Bullet.h" />
+    <ClInclude Include="Headers\Gameplay\BulletPool.h" />
+    <ClInclude Include="Headers\Gameplay\Camera\Camera.h" />
+    <ClInclude Include="Headers\Gameplay\Camera\FollowCamera.h" />
+    <ClInclude Include="Headers\Gameplay\Command.h" />
+    <ClInclude Include="Headers\Gameplay\Components\Component.h" />
+    <ClInclude Include="Headers\Gameplay\Components\Physics\BoxBoundsComponent.h" />
+    <ClInclude Include="Headers\Gameplay\Components\Physics\CircleBoundsComponent.h" />
+    <ClInclude Include="Headers\Gameplay\Components\Physics\RigidBodyComponent.h" />
+    <ClInclude Include="Headers\Gameplay\Components\QuadVisual.h" />
+    <ClInclude Include="Headers\Gameplay\Components\TileVisual.h" />
+    <ClInclude Include="Headers\Gameplay\Components\VisualComponent.h" />
+    <ClInclude Include="Headers\Gameplay\InputManager.h" />
+    <ClInclude Include="Headers\Gameplay\Level.h" />
+    <ClInclude Include="Headers\Gameplay\Transform.h" />
+    <ClInclude Include="Headers\Log.h" />
+    <ClInclude Include="Headers\MathUtils.h" />
+    <ClInclude Include="Headers\Physics\AABB.h" />
+    <ClInclude Include="Headers\Physics\AbstractBounds.h" />
+    <ClInclude Include="Headers\Physics\CircleBounds.h" />
+    <ClInclude Include="Headers\Physics\PhysicsWorld.h" />
+    <ClInclude Include="Headers\Physics\Ray.h" />
+    <ClInclude Include="Headers\Primitives\Line.h" />
+    <ClInclude Include="Headers\Primitives\Quad.h" />
+    <ClInclude Include="Headers\Primitives\Text.h" />
+    <ClInclude Include="Headers\Resources\ActorHandle.h" />
+    <ClInclude Include="Headers\Resources\ShaderLoader.h" />
+    <ClInclude Include="Headers\Resources\StackAllocator.h" />
+    <ClInclude Include="Headers\Resources\Texture.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Shaders\basic.frag">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
+    </None>
+    <None Include="Assets\Shaders\basic.vert">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
+    </None>
+    <None Include="Assets\Shaders\line.frag" />
+    <None Include="Assets\Shaders\line.vert" />
+    <None Include="Assets\Shaders\text.frag" />
+    <None Include="Assets\Shaders\text.vert" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
