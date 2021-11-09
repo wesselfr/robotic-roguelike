@@ -96,13 +96,16 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Actors\Player.cpp" />
     <ClCompile Include="Source\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Headers\Actors\Part.h" />
-    <ClInclude Include="Headers\Actors\Plane.h" />
+    <ClInclude Include="Headers\Actors\Player.h" />
     <ClInclude Include="Headers\Commands.h" />
     <ClInclude Include="Headers\Levels\TestLevel.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Textures\Player.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

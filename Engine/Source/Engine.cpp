@@ -41,7 +41,6 @@ int Engine::Init(const EngineConfiguration& config)
 		}
 
 		glfwMakeContextCurrent(_window);
-		glfwSetInputMode(_window, GLFW_STICKY_KEYS, GL_TRUE);
 		glClearColor(0, 0.168f, 0.211f, 1);
 
 		if (glewInit() != GLEW_OK)
@@ -190,6 +189,11 @@ Actor* Engine::GetActor(const ActorHandle& handle)
 	else {
 		return nullptr;
 	}
+}
+
+void Engine::SetInputMode(const InputMode& mode)
+{
+	_input->SetInputMode(mode);
 }
 
 void Engine::AddInputCommand(Button button, Command* command) 

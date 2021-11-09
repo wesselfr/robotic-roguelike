@@ -32,6 +32,11 @@ enum class ENGINE_API Button {
 	MouseRight,
 };
 
+enum class ENGINE_API InputMode {
+	Normal,
+	Sticky
+};
+
 class InputManager 
 {
 public:
@@ -40,6 +45,7 @@ public:
 	const glm::vec2& GetLeftAxis();
 	const glm::vec2& GetRightAxis();
 
+	void SetInputMode(const InputMode& mode);
 	void SetButtonCommand(Button button, Command* command);
 	void SetActiveActor(Actor* actor);
 private:

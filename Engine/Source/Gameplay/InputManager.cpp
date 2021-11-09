@@ -61,6 +61,7 @@ void InputManager::HandleInput()
 
 const glm::vec2& InputManager::GetLeftAxis() 
 {
+
 	return _gamepadLeftAxis;
 }
 
@@ -68,6 +69,20 @@ const glm::vec2& InputManager::GetRightAxis()
 {
 	return _gamepadRightAxis;
 }
+
+void InputManager::SetInputMode(const InputMode& mode)
+{
+	switch (mode)
+	{
+	case InputMode::Normal:
+		glfwSetInputMode(_window, GLFW_STICKY_KEYS, GL_FALSE);
+		break;
+	case InputMode::Sticky:
+		glfwSetInputMode(_window, GLFW_STICKY_KEYS, GL_TRUE);
+		break;
+	}
+}
+
 
 void InputManager::SetButtonCommand(Button button, Command* command) 
 {

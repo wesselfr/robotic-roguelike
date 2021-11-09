@@ -41,6 +41,7 @@ class DefaultLevel : public Level
 	void OnShutdown() override {}
 };
 
+#define NEW_CLASS(engine, type, ...) new (engine->AllocMem(sizeof(type))) type(__VA_ARGS__)
 class Engine {
 private:
 	GLFWwindow* _window = nullptr;
@@ -72,6 +73,7 @@ public:
 	ENGINE_API void TranslateActor(const ActorHandle& handle, float x, float y, float z);
 	ENGINE_API void SetPlayerActor(const ActorHandle& handle);
 	ENGINE_API Actor* GetActor(const ActorHandle& handle);
+	ENGINE_API void SetInputMode(const InputMode& mode);
 	ENGINE_API void AddInputCommand(Button button, Command* command);
 
 	// LEVEL API (TEST)

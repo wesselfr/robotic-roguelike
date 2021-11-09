@@ -1,6 +1,6 @@
 #pragma once
 #include "Gameplay\Level.h"
-#include "Actors\Plane.h"
+#include "Actors\Player.h"
 #include "Commands.h"
 
 #define SPAWN_ACTOR(ENGINE, ACTOR) ENGINE->SpawnActor(new (ENGINE->AllocMem(sizeof(ACTOR))) ACTOR(ENGINE))
@@ -8,7 +8,7 @@
 class TestLevel : public Level {
     void OnBegin() override
     {
-        _playerHandle = SPAWN_ACTOR(engine, Plane);
+        _playerHandle = SPAWN_ACTOR(engine, Player);
 
         engine->SetPlayerActor(_playerHandle);
         Actor* playerActor = engine->GetActor(_playerHandle);
@@ -16,18 +16,10 @@ class TestLevel : public Level {
         playerActor->Translate(glm::vec3(-512, 512, -20.f));
         playerActor->Scale(glm::vec3(1.f) * 32.f);
 
-        SPAWN_ACTOR(engine, Plane);
-
-        BulletInfo bulletInfo;
-        bulletInfo.damage = 20;
-        _pool = new BulletPool(100, bulletInfo, engine);
-
-        engine->AddInputCommand(Button::KeyQ, new SpawnPartCommand(engine, _playerHandle));
-        engine->AddInputCommand(Button::KeyW, new ChangeSpeedCommand(engine, 30.f));
-        engine->AddInputCommand(Button::KeyS, new ChangeSpeedCommand(engine, -20.f));
-        engine->AddInputCommand(Button::KeyA, new RotateCommand(engine, -3.f));
-        engine->AddInputCommand(Button::KeyD, new RotateCommand(engine, 3.f));
-        engine->AddInputCommand(Button::KeySpace, new ShootCommand(engine, _pool));
+        engine->AddInputCommand(Button::KeyW, new MoveCommand(engine, {0,10}));
+        engine->AddInputCommand(Button::KeyA, new MoveCommand(engine, {10,0}));
+        engine->AddInputCommand(Button::KeyS, new MoveCommand(engine, {0, -10}));
+        engine->AddInputCommand(Button::KeyD, new MoveCommand(engine, {-10,0}));
         
         const EngineConfiguration& config = engine->GetConfig();
         // Only initialize text rendering when not running headless.
@@ -38,17 +30,11 @@ class TestLevel : public Level {
     }
     void Update(float deltaTime) override
     {
-        //RotateCommand rotate(engine, 3.f);
-        //rotate.Execute(*engine->GetActor(1));
-
-        _pool->Update(deltaTime);
-
         if (!engine->GetConfig().isHeadless) {
             Actor* planeActor = engine->GetActor(_playerHandle);
             glm::vec3 planeWorldPosition = planeActor->GetWorldPosition();
             _text.Draw("Plane", glm::vec2(-planeWorldPosition.x - 25.f, planeWorldPosition.y + 35.f), 0.4f, glm::vec3(1.f));
 
-            _pool->Draw(engine->GetActiveCamera()->GetViewProjection());
         }
     }
     void OnShutdown() override
@@ -58,6 +44,5 @@ class TestLevel : public Level {
 private:
     Text _text;
     ActorHandle _playerHandle;
-    BulletPool* _pool;
 };
 

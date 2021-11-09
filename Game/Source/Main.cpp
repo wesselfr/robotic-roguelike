@@ -8,9 +8,10 @@ int main()
 {
     Engine engine;
     EngineConfiguration config;
-    config.title = "PlaneShooter";
+    config.title = "Robotic Roguelike";
 
     if (engine.Init(config) >= 0) { 
+        engine.SetInputMode(InputMode::Sticky);
         engine.SetActiveLevel(new TestLevel());
         engine.Run();
         engine.Shutdown();

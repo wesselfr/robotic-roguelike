@@ -15,22 +15,27 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Game\Source\Main.cpp">
+    <ClCompile Include="Source\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Actors\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game\Headers\Levels\TestLevel.h">
+    <ClInclude Include="Headers\Commands.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Headers\Commands.h">
+    <ClInclude Include="Headers\Levels\TestLevel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Headers\Actors\Plane.h">
+    <ClInclude Include="Headers\Actors\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Headers\Actors\Part.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Textures\Player.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
