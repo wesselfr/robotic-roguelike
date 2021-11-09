@@ -8,10 +8,10 @@ Player::Player(Engine* engine) : Actor()
 	_aabb = NEW_CLASS(engine, AABB, this, glm::vec2(32,32));
 	_rigidBody = NEW_CLASS(engine, RigidBodyComponent, this, _aabb);
 
-	Texture texture("Assets/Textures/Player.png");
+	Texture texture("Assets/Textures/pixelshmup/ships.png");
 
 	TileVisual* tileVisual = NEW_CLASS(engine, TileVisual);
-	tileVisual->SetSprite(0,texture);
+	tileVisual->SetSprite(6,texture);
 	_visuals = tileVisual;
 	_visuals->SetTransform(this);
 	_visuals->Init();

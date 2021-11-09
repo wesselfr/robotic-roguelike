@@ -24,6 +24,7 @@ struct EngineConfiguration {
 	int height = 768;
 	const char* title = "Viper Engine";
 	bool isHeadless = false;
+	bool debugEnabled = false;
 	bool limitFPS = true;
 };
 

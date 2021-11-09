@@ -1,4 +1,5 @@
 #include "Gameplay\BulletPool.h"
+#include "Gameplay\Components\TileVisual.h"
 #include "Engine.h"
 
 BulletPool::BulletPool(int size, BulletInfo info, Engine* instance)
@@ -7,14 +8,14 @@ BulletPool::BulletPool(int size, BulletInfo info, Engine* instance)
 
 	_size = size;
 	Bullet* bulletMem = static_cast<Bullet*>(instance->AllocMem(sizeof(Bullet) * _size));
-	QuadVisual* visualMem = static_cast<QuadVisual*>(instance->AllocMem(sizeof(QuadVisual) * _size));
+	TileVisual* visualMem = static_cast<TileVisual*>(instance->AllocMem(sizeof(TileVisual) * _size));
 	_marker = (uint64_t)bulletMem;
 
 	// Only initialize visuals when engine is not running headless.
 	if (!instance->GetConfig().isHeadless) {
 		for (int i = 0; i < _size; i++)
 		{
-			new (&visualMem[i]) QuadVisual();
+			new (&visualMem[i]) TileVisual(info.visual);
 		}
 	}
 	else {

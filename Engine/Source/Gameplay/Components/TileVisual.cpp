@@ -1,6 +1,12 @@
 #include "Gameplay\Components\TileVisual.h"
 
-ENGINE_API void TileVisual::Init()
+ENGINE_API TileVisual::TileVisual(int id, const Texture& texture, int spriteWidth, int spriteHeight)
+{
+	Init();
+	SetSprite(id, texture, spriteWidth, spriteHeight);
+}
+
+void TileVisual::Init()
 {
 	ShaderLoader shaderLoader;
 	_quad.Init(shaderLoader.LoadDefaultShaders(), _transform);

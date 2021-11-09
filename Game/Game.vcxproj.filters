@@ -26,7 +26,7 @@
     <ClInclude Include="Headers\Commands.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\Levels\TestLevel.h">
+    <ClInclude Include="Headers\Levels\GameLevel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Headers\Actors\Player.h">

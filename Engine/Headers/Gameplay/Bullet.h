@@ -1,11 +1,13 @@
 #pragma once
 #include "Actor.h"
 #include "Physics\AABB.h"
+#include "Components\TileVisual.h"
 #include "API.h"
 
 struct BulletInfo 
 {
 	float damage;
+	TileVisual visual;
 };
 
 class Bullet : public Actor 

@@ -102,7 +102,7 @@
   <ItemGroup>
     <ClInclude Include="Headers\Actors\Player.h" />
     <ClInclude Include="Headers\Commands.h" />
-    <ClInclude Include="Headers\Levels\TestLevel.h" />
+    <ClInclude Include="Headers\Levels\GameLevel.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\Player.png" />

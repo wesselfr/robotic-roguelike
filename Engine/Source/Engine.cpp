@@ -103,7 +103,7 @@ int Engine::Run()
 			}
 		}
 
-		if (!_config.isHeadless) {
+		if (!_config.isHeadless && _config.debugEnabled) {
 			DebugVisuals::GetInstance()->DrawText(glm::vec3(20, _config.height - 50, 0), glm::vec3(1.f), "MEM USAGE: %i / %i", (int)(_stack.GetMarker() - _emptyMarker), MAX_ACTORS * sizeof(Actor));
 			DebugVisuals::GetInstance()->DrawText(glm::vec3(20, _config.height - 60, 0), glm::vec3(1.f), "FPS: %i", (int)(1.f / _deltaTime));
 		}
