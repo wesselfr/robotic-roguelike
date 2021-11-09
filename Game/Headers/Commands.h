@@ -26,13 +26,15 @@ private:
 class ShootCommand : public Command
 {
 public:
-	ShootCommand(Engine* engine, BulletPool* bullets)
+	ShootCommand(Engine* engine, BulletPool* bullets, bool& canShoot) : _canShoot(canShoot)
 	{
 		_engine = engine;
 		_bullets = bullets;
 	}
 	void Execute(Actor& actor) override
 	{
+		if(!_canShoot){return;}
+
 		Log::LogMessage("Shoot!");
 		glm::vec3 worldPosition = actor.GetWorldPosition();
 		Bullet* bullet = _bullets->Get();
@@ -42,12 +44,14 @@ public:
 		float r = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
 		r = -1 + r * (2);
 
-		glm::vec2 direction = glm::vec2({r * 50.f, 700.f});
+		glm::vec2 direction = glm::vec2({r * 100.f, 700.f});
 		bullet->SetVelocity(direction);
 		bullet->LookAt(worldPosition + glm::vec3(direction.y, -direction.x, 0.f));
 		bullet->SetActive(true);
+		_canShoot = false;
 	}
 private:
 	Engine* _engine;
 	BulletPool* _bullets;
+	bool& _canShoot;
 };

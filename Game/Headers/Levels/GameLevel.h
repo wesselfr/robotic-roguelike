@@ -23,7 +23,8 @@ public:
 
         engine->AddInputCommand(Button::KeyA, new MoveCommand(engine, {1,0},350.f));
         engine->AddInputCommand(Button::KeyD, new MoveCommand(engine,{-1,0},350.f));
-        engine->AddInputCommand(Button::KeySpace, new ShootCommand(engine, _bullets));
+        engine->AddInputCommand(Button::KeySpace, new ShootCommand(engine, _bullets, _canShoot));
+        engine->AddInputCommand(Button::MouseLeft, new ShootCommand(engine, _bullets, _canShoot));
 
         // Score
         _scoreText.Init();
@@ -44,6 +45,18 @@ public:
 
 		_score += 3.6f * deltaTime;
         int score = static_cast<int>(_score);
+
+        if(!_canShoot)
+        {
+	        _bulletTimer+= deltaTime;
+            if(_bulletTimer > 0.05)
+            {
+	            _bulletTimer = 0.f;
+                _canShoot = true;
+            }
+        }
+        //if(score % 2 == 0){_canShoot = true;}
+
         char buff[512];
         snprintf(buff,sizeof(char)*512, "Score: %i", score);
         _scoreText.Draw(buff, {engine->GetConfig().width * 0.35f, engine->GetConfig().height * 0.9f,}, 1.f, {1,1,1});
@@ -58,6 +71,9 @@ private:
     BulletPool* _bullets;
 	float _score = 0.f;
     Text _scoreText;
+
+    float _bulletTimer =0.f;
+    bool _canShoot = false;
 
 };
 
